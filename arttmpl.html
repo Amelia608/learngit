@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="content"></div>
+		<button>加载更多...</button>
+		<script id="test" type="text/html">
+			<ul>
+				<% for(var i=0;i<list.length;i++){%>
+				<li>条目内容：
+					<%=list[i].name %>
+					<% for(var j=0;j<list[i].hoby.length;j++){%>
+					<% if(j==0){ %>
+					<span>
+							爱好1：<%=list[i].hoby[j]%>
+						</span>
+					<%}else{%>
+					<span>
+							爱好2：<%=list[i].hoby[j]%>
+						</span>
+					<%}%>
+					<%}%>
+				</li>
+				<%}%>
+			</ul>
+		</script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/arttmpl.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var listData = [{
+						'name': 'cy',
+						'age': 17,
+						'hoby': ['music', 'math', 'english']
+					},
+					{
+						'name': 'linda',
+						'age': 21,
+						'hoby': ['music', 'chinese', 'english']
+					},
+					{
+						'name': 'eric',
+						'age': 17,
+						'hoby': ['music', 'chinese']
+					}
+				];
+				var data = {
+					author: '主题',
+					isAdmin: true,
+					//					list: ['千与千寻', '哈尔的移动城堡', '幽灵公主', '风之谷', '龙猫']
+					list: listData
+				};
+				var html = template('test', data);
+				$("button").on("click", function() {
+					$("#content").append(html);
+				})
+				//document.getElementById("content").innerHTML = html;
+			});
+		</script>
+	</body>
+
+</html>
